@@ -72,17 +72,17 @@ export default function Home() {
             value: 0n,
             ...(inscription
               ? {
-                  data: stringToHex(inscription),
-                }
+                data: stringToHex(inscription),
+              }
               : {}),
             ...(gas > 0
               ? gasRadio === "all"
                 ? {
-                    gasPrice: parseEther(gas.toString(), "gwei"),
-                  }
+                  gasPrice: parseEther(gas.toString(), "gwei"),
+                }
                 : {
-                    maxPriorityFeePerGas: parseEther(gas.toString(), "gwei"),
-                  }
+                  maxPriorityFeePerGas: parseEther(gas.toString(), "gwei"),
+                }
               : {}),
           });
         }),
@@ -111,13 +111,13 @@ export default function Home() {
 
   const run = useCallback(() => {
     if (privateKeys.length === 0) {
-      pushLog("没有私钥", "error");
+      pushLog("Pas de clé privée", "error");
       setRunning(false);
       return;
     }
 
     if (radio === "manyToOne" && !toAddress) {
-      pushLog("没有地址", "error");
+      pushLog("Pas d'adresse", "error");
       setRunning(false);
       return;
     }
@@ -134,7 +134,7 @@ export default function Home() {
   return (
     <div className=" flex flex-col gap-4">
       <div className=" flex flex-col gap-2">
-        <span>链（选要打铭文的链）:</span>
+        <span>Chaîne (choisir la chaîne pour l'inscription) :</span>
         <TextField
           select
           defaultValue="eth"
@@ -157,12 +157,12 @@ export default function Home() {
       </div>
 
       <div className=" flex flex-col gap-2">
-        <span>私钥（必填，每行一个）:</span>
+        <span>Clé privée (obligatoire, une par ligne) :</span>
         <TextField
           multiline
           minRows={2}
           size="small"
-          placeholder="私钥，带不带 0x 都行，程序会自动处理"
+          placeholder="Clé privée, avec ou sans 0x, le programme gérera automatiquement"
           disabled={running}
           onChange={(e) => {
             const text = e.target.value;
@@ -194,23 +194,23 @@ export default function Home() {
         <FormControlLabel
           value="meToMe"
           control={<Radio />}
-          label="自转"
+          label="Rotation automatique"
           disabled={running}
         />
         <FormControlLabel
           value="manyToOne"
           control={<Radio />}
-          label="多转一"
+          label="Plusieurs vers un"
           disabled={running}
         />
       </RadioGroup>
 
       {radio === "manyToOne" && (
         <div className=" flex flex-col gap-2">
-          <span>转给谁的地址（必填）:</span>
+          <span>Adresse du destinataire (obligatoire) :</span>
           <TextField
             size="small"
-            placeholder="地址"
+            placeholder="adresse"
             disabled={running}
             onChange={(e) => {
               const text = e.target.value;
@@ -221,10 +221,10 @@ export default function Home() {
       )}
 
       <div className=" flex flex-col gap-2">
-        <span>铭文（选填，原始铭文，不是转码后的十六进制）:</span>
+        <span>Inscription (facultatif, inscription originale, pas l'hexadécimal encodé) :</span>
         <TextField
           size="small"
-          placeholder={`铭文，不要输入错了，多检查下，例子：\n${example}`}
+          placeholder={`Inscription, faites attention à ne pas vous tromper, vérifiez plusieurs fois, exemple：\n${example}`}
           disabled={running}
           onChange={(e) => {
             const text = e.target.value;
@@ -235,7 +235,7 @@ export default function Home() {
 
       <div className=" flex flex-col gap-2">
         <span>
-          RPC (选填, 默认公共有瓶颈经常失败, 最好用付费的, http 或者 ws 都可以):
+          RPC (facultatif, par défaut le public échoue souvent, mieux vaut utiliser un service payant, http ou ws) :
         </span>
         <TextField
           size="small"
@@ -259,25 +259,24 @@ export default function Home() {
         <FormControlLabel
           value="tip"
           control={<Radio />}
-          label="额外矿工小费"
+          label="Pourboire supplémentaire pour le mineur"
           disabled={running}
         />
         <FormControlLabel
           value="all"
           control={<Radio />}
-          label="总 gas"
+          label="Gas total"
           disabled={running}
         />
       </RadioGroup>
 
       <div className=" flex flex-col gap-2">
-        <span>{gasRadio === "tip" ? "额外矿工小费" : "总 gas"} (选填):</span>
+        <span>{gasRadio === "tip" ? "Pourboire supplémentaire pour le mineur" : "Gas total"} (选填):</span>
         <TextField
           type="number"
           size="small"
-          placeholder={`${
-            gasRadio === "tip" ? "默认 0" : "默认最新"
-          }, 单位 gwei，例子: 10`}
+          placeholder={`${gasRadio === "tip" ? "Défaut 0" : "Dernier par défaut"
+            }, en gwei, exemple : 10`}
           disabled={running}
           onChange={(e) => {
             const num = Number(e.target.value);
@@ -287,11 +286,11 @@ export default function Home() {
       </div>
 
       <div className=" flex flex-col gap-2">
-        <span>每笔交易间隔时间 (选填, 最低 0 ms):</span>
+        <span>Intervalle de temps entre chaque transaction (facultatif, minimum 0 ms) :</span>
         <TextField
           type="number"
           size="small"
-          placeholder="默认 0 ms"
+          placeholder="Défaut 0 ms"
           disabled={running}
           onChange={(e) => {
             const num = Number(e.target.value);
@@ -311,11 +310,11 @@ export default function Home() {
           }
         }}
       >
-        {running ? "运行中" : "运行"}
+        {running ? "En cours d'exécution" : "Exécuter"}
       </Button>
 
       <Log
-        title={`日志（成功次数 => ${successCount}）:`}
+        title={`Journal (nombre de succès => ${successCount}）:`}
         logs={logs}
         onClear={() => {
           setLogs([]);
