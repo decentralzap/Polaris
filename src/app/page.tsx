@@ -134,7 +134,7 @@ export default function Home() {
   return (
     <div className=" flex flex-col gap-4">
       <div className=" flex flex-col gap-2">
-        <span>Chaîne (choisir la chaîne pour l'inscription) :</span>
+        <span>Chaîne (choisir la chaîne pour l inscription) :</span>
         <TextField
           select
           defaultValue="eth"
@@ -221,7 +221,7 @@ export default function Home() {
       )}
 
       <div className=" flex flex-col gap-2">
-        <span>Inscription (facultatif, inscription originale, pas l'hexadécimal encodé) :</span>
+        <span>Inscription (facultatif, inscription originale, pas l hexadécimal encodé) :</span>
         <TextField
           size="small"
           placeholder={`Inscription, faites attention à ne pas vous tromper, vérifiez plusieurs fois, exemple：\n${example}`}
@@ -271,7 +271,7 @@ export default function Home() {
       </RadioGroup>
 
       <div className=" flex flex-col gap-2">
-        <span>{gasRadio === "tip" ? "Pourboire supplémentaire pour le mineur" : "Gas total"} (选填):</span>
+        <span>{gasRadio === "tip" ? "Pourboire supplémentaire pour le mineur" : "Gas total"} (facultatif):</span>
         <TextField
           type="number"
           size="small"
